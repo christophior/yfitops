@@ -37,8 +37,6 @@ if (process.argv.length >= 3) {
 var getStarredPlaylistUsername = function (playlistURI) {
     var splitURI = playlistURI.split(':');
     var isStarred = splitURI[3] === 'starred' ? true : false;
-    console.log(isStarred);
-    console.log(splitURI[2]);
     return isStarred ? splitURI[2] : undefined;
 };
 
