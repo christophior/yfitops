@@ -13,7 +13,7 @@ var downloadTrack = function (spotify, trackURI, callback) {
         }
 
         var trackName = getTrackName(track);
-        var fileName = util.format('%s', getPathName(), trackName);
+        var fileName = util.format('%s%s', getPathName(), trackName);
 
         if (fs.existsSync(fileName)) {
             console.log('\t%s already exists', trackName);
