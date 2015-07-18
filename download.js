@@ -34,10 +34,6 @@ var downloadTrack = function (spotify, trackURI, callback) {
 
 var downloadPlaylist = function (spotify, uri, callback) {
     spotifyPlaylist.playlistUri(uri, function (err, result) {
-        if (err) {
-            spotify.disconnect();
-            throw err;
-        }
 
         console.log('Downloading playlist:');
         var tracksArray = result.playlist.tracks;
