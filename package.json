@@ -1,0 +1,26 @@
+{
+  "name": "yfitops",
+  "version": "0.1.0",
+  "description": "An easy way to download any song from spotify",
+  "author": "Chris Villarreal",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app",
+    "test": "grunt test",
+    "build": "grunt build",
+    "all": "npm run build && npm run test"
+  },
+  "dependencies": {
+    "async": "^1.3.0",
+    "express": "^4.12.2",
+    "lame": "^1.2.2",
+    "speaker": "^0.2.5",
+    "spotify-playlist": "0.0.3",
+    "spotify-web": "^1.3.0",
+    "util": "^0.10.3"
+  },
+  "devDependencies": {
+    "mocha": "^1.18.0",
+    "supertest": "^0.9.0"
+  }
+}
