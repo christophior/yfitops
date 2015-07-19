@@ -11,10 +11,15 @@ var downloadTrack = function (spotify, trackURI, callback) {
             throw err;
         }
 
+        var isTrackAvailable = spotify.isTrackAvailable(track, spotify.country);
         var trackName = getTrackName(track);
         var fileName = util.format('%s%s', getPathName(), trackName);
+
         if (fs.existsSync(fileName) && getFilesizeInBytes(fileName) !== 0) {
             console.log('\t%s already exists', trackName);
+            callback();
+        } else if (!isTrackAvailable) {
+            console.log('%s is not available in your country', trackName);
             callback();
         } else {
             console.log('\tDownloading: %s', trackName);
