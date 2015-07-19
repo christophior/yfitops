@@ -19,7 +19,7 @@ var downloadTrack = function (spotify, trackURI, callback) {
             console.log('\t%s already exists', trackName);
             callback();
         } else if (!isTrackAvailable) {
-            console.log('%s is not available in your country', trackName);
+            console.log('\t%s is not available in your country', trackName);
             callback();
         } else {
             console.log('\tDownloading: %s', trackName);
