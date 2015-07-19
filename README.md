@@ -17,7 +17,7 @@ I believe the default Music folder location in Mac's is **/Users/USERNAME/Music*
 
 ## Running
 
-Running on the current node version seems to not work properly but Node v0.10.36 seems to work. To install different versions of Node I would recommend NVM. To get NVM you can run the following
+Running on the current node version seems to not work properly but [Node v0.10.36](http://blog.nodejs.org/2015/01/26/node-v0-10-36-stable/) seems to work. To install different versions of Node I would recommend NVM. To get NVM you can run the following
 ```
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.25.4/install.sh | bash
 ```
