@@ -1,4 +1,4 @@
-var Spotify = require('spotify-web'),
+var Spotify = require('yfitops-web'),
     download = require('./download'),
     uri = process.argv[2];
 
@@ -11,6 +11,7 @@ if (process.argv.length >= 3) {
     Spotify.login(username, password, function (err, spotify) {
         if (err) throw err;
 
+        uri = Spotify.url2uri(uri);
         var uriType = Spotify.uriType(uri);
 
         if (uriType === 'track') {
@@ -20,13 +21,11 @@ if (process.argv.length >= 3) {
             });
         } else if (uriType === 'playlist') {
             console.log('Given URI is a Spotify playlist...');
+            download.playlist(spotify, uri, disconnect);
+        } else if (uriType === 'starred') {
             var starredPlaylistUsername = getStarredPlaylistUsername(uri);
-            if (starredPlaylistUsername){
-                download.starredPlaylist(spotify, starredPlaylistUsername, disconnect);
-            } else {
-                download.playlist(spotify, uri, disconnect);
-            }
-        } else {
+            download.starredPlaylist(spotify, starredPlaylistUsername, disconnect);
+        }else {
             console.log('Invalid URI given');
         }
     });
