@@ -2,7 +2,6 @@ var Spotify = require('yfitops-web'),
     download = require('./download'),
     isConfig = process.argv[2] === 'config',
     config = require('./config/config'),
-    configData = require('./config/config.json'),
     read = require('read'),
     uri = process.argv[2];
 
@@ -17,9 +16,12 @@ if (isConfig) {
     });
 } else if (process.argv.length >= 3) {
     // configurations
-    var config = require('./config/config'),
+    var configData = require('./config/config.json'),
         username = configData.username,
         password = configData.password.length === 32 ? config.decryptPassword(configData.password) : configData.password;
+    if (!username || !password) {
+        console.log('username/password not present, please run \'node app.js config\'');
+    }
 
     Spotify.login(username, password, function (err, spotify) {
         if (err) throw err;
