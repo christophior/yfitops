@@ -1,13 +1,26 @@
 var Spotify = require('yfitops-web'),
     download = require('./download'),
+    isConfig = process.argv[2] === 'config',
+    config = require('./config/config'),
+    configData = require('./config/config.json'),
+    read = require('read'),
     uri = process.argv[2];
 
-// configurations
-var config = require('./config'),
-    username = config.username,
-    password = config.password;
 
-if (process.argv.length >= 3) {
+if (isConfig) {
+    read({ prompt: 'Username: ', silent: false }, function(er, username) {
+        read({ prompt: 'Password (will not be shown when typed): ', silent: true }, function(er, password) {
+            read({ prompt: 'Download directory (e.g. /Users/username/Music): ', silent: false }, function(er, directory) {
+                config.configCredentials(username, password, directory);
+            });
+        });
+    });
+} else if (process.argv.length >= 3) {
+    // configurations
+    var config = require('./config/config'),
+        username = configData.username,
+        password = configData.password.length === 32 ? config.decryptPassword(configData.password) : configData.password;
+
     Spotify.login(username, password, function (err, spotify) {
         if (err) throw err;
 

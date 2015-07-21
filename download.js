@@ -1,7 +1,7 @@
 var util = require('util'),
     async = require('async'),
     fs = require('fs'),
-    path = require('./config').path;
+    path = require('./config/config.json').path;
 
 
 var downloadTrack = function (spotify, trackURI, callback) {
