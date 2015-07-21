@@ -1,5 +1,6 @@
 YFITOPS
 ===========
+#### **The underlying download logic has been removed to prevent exploitation by users**
 
 ## Configuration
 Before being able to run the script you will need to do some configuration.
@@ -87,5 +88,3 @@ This application was created to gain knowledge in Node and Javascript.
 Using the script is very likely to be a breach of the Spotify End User Agreement:
 
 > Spotify respects intellectual property rights and expects you to do the same. This means, for example, that the following is not permitted: (a) Copying, reproducing, “ripping”, recording, or making available to the public any part of the Spotify Services or content delivered to you via the Spotify Services, or otherwise any making use of the Spotify Service which is not expressly permitted under these Terms
-
-
