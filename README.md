@@ -83,4 +83,9 @@ Given URI is a Spotify track...
 ```
 
 ## Disclaimer
-This application was created to gain knowledge in Node and Javascript, I am not liable for what you do with this script. Please don't download content that you're not legally allowed to.
+This application was created to gain knowledge in Node and Javascript.
+Using the script is very likely to be a breach of the Spotify End User Agreement:
+
+> Spotify respects intellectual property rights and expects you to do the same. This means, for example, that the following is not permitted: (a) Copying, reproducing, “ripping”, recording, or making available to the public any part of the Spotify Services or content delivered to you via the Spotify Services, or otherwise any making use of the Spotify Service which is not expressly permitted under these Terms
+
+
