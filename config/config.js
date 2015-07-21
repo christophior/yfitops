@@ -9,7 +9,6 @@ configCredentials = function (username, password, directory) {
     content.username = username;
     content.password = encryptedPassword;
     content.path = directory;
-    console.log(encryptedPassword);
     fs.writeFileSync(fileName, JSON.stringify(content));
 };
 
@@ -22,7 +21,6 @@ var encrypt = function (text) {
 };
 
 var decrypt = function (text) {
-    console.log(text);
     var decipher = crypto.createDecipher('aes-256-cbc','d6F3Efeq')
     var dec = decipher.update(text,'hex','utf8')
     dec += decipher.final('utf8');
