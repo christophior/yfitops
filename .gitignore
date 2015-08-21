@@ -1,6 +1,5 @@
-# Created by https://www.gitignore.io
-
 download.js
+/config/config.json
 
 ### OSX ###
 .DS_Store
