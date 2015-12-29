@@ -1,20 +1,40 @@
 var util = require('util'),
     fs = require('fs'),
     exec = require('child_process').exec,
+    request = require('request'),
     path = require('./config/config.json').path;
 
-var idTrack = function (track, fileName, callback) {
-    var args = [
-            'eyeD3',
-            '-t', '"'+track.name+'"',
-            '-a', '"'+track.artist[0].name+'"',
-            '-A', '"'+track.album.name+'"',
-            '-Y', '"'+track.album.date.year+'"',
-            '"' + fileName + '"'
-        ],
+var id3Track = function (track, fileName, trackURI, callback) {
+    privateGetAlbumCoverPathThenTagTrack(trackURI, fileName, function(albumCoverPath) {
+        var albumCoverExists = albumCoverPath !== '',
+            cmd,
+            id3Process,
+            args = [
+                'eyeD3',
+                '-t', '"'+track.name+'"',
+                '-a', '"'+track.artist[0].name+'"',
+                '-A', '"'+track.album.name+'"',
+                '-Y', track.album.date.year,
+                '-n', track.number,
+                '-d', track.discNumber,
+            ];
+
+        if (albumCoverExists) {
+            args.push('--add-image');
+            args.push('"' + albumCoverPath + ':FRONT_COVER' + '"');
+        }
+        args.push('"' + fileName + '"');
         cmd = args.join(' ');
-    exec(cmd);
-    callback();
+        id3Process = exec(cmd);
+
+        id3Process.on('exit', function() {
+            if (albumCoverExists) {
+                exec('rm "' + albumCoverPath + '"');
+            }
+        });
+
+        callback();
+    });
 };
 
 var getTrackName = function (track) {
@@ -32,8 +52,62 @@ var getFilesizeInBytes = function (filename) {
     return fileSizeInBytes;
 };
 
+var privateGetTrackId = function (trackUri) {
+    var splitUri = trackUri.split(':');
+    return splitUri[splitUri.length - 1];
+};
+
+/*
+ *  trackUri: used to get track id to call Spotify web api
+ *  fileName: used to save image locally as <song file name>.jpg
+ *  callback: continue with executing id3 tagging after gathering temp copy of album artwork
+*/
+var privateGetAlbumCoverPathThenTagTrack = function (trackUri, fileName, callback) {
+    var trackId = privateGetTrackId(trackUri),
+        requestEndpoint = 'https://api.spotify.com/v1/tracks/' + trackId,
+        trackData;
+
+    request({
+        url: requestEndpoint,
+        json: true
+    }, function (error, response, body) {
+        if (!error && response.statusCode === 200) {
+            trackData = body;
+        }
+
+        if (trackData && trackData.album && trackData.album.images && trackData.album.images.length > 0){
+            privateSaveTemporaryArtworkImage(trackData.album.images[0].url, fileName, callback);
+        } else {
+            callback('');
+        }
+    });
+};
+
+var privateSaveTemporaryArtworkImage = function (imageUrl, fileName, callback) {
+    var imagePath = fileName + '.jpg';
+    request({
+        url: imageUrl,
+        encoding: 'binary'
+    }, function (error, response, body) {
+        fs.writeFile(imagePath, body, 'binary', function (err) {
+            if (err) {
+                callback('');
+            } else {
+                callback(imagePath);
+            }
+        });
+    });
+
+};
+
+var privateExecuteTaggingAndDeleteLocalArtwork = function (args, callback) {
+    var command = args.join(' ');
+    exec(command);
+    callback();
+};
+
 module.exports = {
-    idTrack: idTrack,
+    id3Track: id3Track,
     getTrackName: getTrackName,
     getPathName: getPathName,
     getFilesizeInBytes: getFilesizeInBytes
