@@ -83,6 +83,13 @@ Given URI is a Spotify track...
 	Downloading: Kygo - Firestone.mp3
 ```
 
+# to prevent config file from being pushed
+```
+git update-index --assume-unchanged config/config.json
+# to undo this
+git update-index --no-assume-unchanged config/config.json
+```
+
 ## Disclaimer
 This application was created to gain knowledge in Node and Javascript.
 Using the script is very likely to be a breach of the Spotify End User Agreement:
