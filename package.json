@@ -16,7 +16,7 @@
     "read": "^1.0.6",
     "request": "^2.67.0",
     "util": "^0.10.3",
-    "yfitops-web": "^0.1.2"
+    "yfitops-web": "^0.2.1"
   },
   "devDependencies": {
     "mocha": "^1.18.0",
