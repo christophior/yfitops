@@ -1,5 +1,6 @@
 download.js
 config/config.json
+/config/config.json
 
 ### OSX ###
 .DS_Store
