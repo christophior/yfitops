@@ -40,7 +40,7 @@ if (isConfig) {
         } else if (uriType === 'starred') {
             var starredPlaylistUsername = getStarredPlaylistUsername(uri);
             download.starredPlaylist(spotify, starredPlaylistUsername, disconnect);
-        }else {
+        } else {
             console.log('Invalid URI given');
         }
     });
@@ -50,7 +50,7 @@ if (isConfig) {
 
 var getStarredPlaylistUsername = function (playlistURI) {
     var splitURI = playlistURI.split(':');
-    var isStarred = splitURI[3] === 'starred' ? true : false;
+    var isStarred = splitURI[3] === 'starred';
     return isStarred ? splitURI[2] : undefined;
 };
 
