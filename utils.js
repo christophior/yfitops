@@ -11,9 +11,9 @@ var id3Track = function (track, fileName, trackURI, callback) {
             id3Process,
             args = [
                 'eyeD3',
-                '-t', '"'+track.name+'"',
-                '-a', '"'+track.artist[0].name+'"',
-                '-A', '"'+track.album.name+'"',
+                '-t', '"'+removeQuotes(track.name)+'"',
+                '-a', '"'+removeQuotes(track.artist[0].name)+'"',
+                '-A', '"'+removeQuotes(track.album.name)+'"',
                 '-Y', track.album.date.year,
                 '-n', track.number,
                 '-d', track.discNumber,
@@ -39,7 +39,7 @@ var id3Track = function (track, fileName, trackURI, callback) {
 
 var getTrackName = function (track) {
     var trackName = util.format('%s - %s.mp3', track.artist[0].name, track.name);
-    return trackName.replace(/\//g, '');
+    return removeQuotes(trackName.replace(/\//g, ''));
 };
 
 var getPathName = function(){
@@ -100,10 +100,8 @@ var privateSaveTemporaryArtworkImage = function (imageUrl, fileName, callback) {
 
 };
 
-var privateExecuteTaggingAndDeleteLocalArtwork = function (args, callback) {
-    var command = args.join(' ');
-    exec(command);
-    callback();
+var removeQuotes = function (str) {
+    return str.replace(/"/g, '')
 };
 
 module.exports = {

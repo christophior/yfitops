@@ -51,6 +51,19 @@ var downloadPlaylist = function (spotify, playlistURI, callback) {
     });
 };
 
+var downloadAlbum = function (spotify, albumURI, callback) {
+    spotify.get(albumURI, function (err, album) {
+        if (err) throw err;
+        console.log('Downloading album:');
+        var tracksArray = [];
+        album.disc.forEach(function (disc) {
+            if (!Array.isArray(disc.track)) return;
+            tracksArray.push.apply(tracksArray, disc.track);
+        });
+        privateLoopThroughTracks(spotify, tracksArray, callback);
+    });
+};
+
 var downloadStarredPlaylist = function (spotify, username, callback) {
     spotify.starred(username, function (err, starred) {
         if (err) throw err;
@@ -76,5 +89,6 @@ var privateLoopThroughTracks = function (spotify, tracksArray, callback) {
 module.exports = {
     track: downloadTrack,
     playlist: downloadPlaylist,
+    album: downloadAlbum,
     starredPlaylist: downloadStarredPlaylist
 };

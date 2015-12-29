@@ -37,6 +37,9 @@ if (isConfig) {
         } else if (uriType === 'playlist') {
             console.log('Given URI is a Spotify playlist...');
             download.playlist(spotify, uri, disconnect);
+        }  else if (uriType === 'album') {
+            console.log('Given URI is a Spotify album...');
+            download.album(spotify, uri, disconnect);
         } else if (uriType === 'starred') {
             var starredPlaylistUsername = getStarredPlaylistUsername(uri);
             download.starredPlaylist(spotify, starredPlaylistUsername, disconnect);
