@@ -3,6 +3,7 @@ var util = require('util'),
     fs = require('fs'),
     id3Track = require('./utils').id3Track,
     getTrackName = require('./utils').getTrackName,
+    getArtistName = require('./utils').getArtistName,
     getPathName = require('./utils').getPathName,
     getFilesizeInBytes = require('./utils').getFilesizeInBytes;
 
@@ -16,7 +17,9 @@ var downloadTrack = function (spotify, trackURI, callback) {
 
         var isTrackAvailable = spotify.isTrackAvailable(track, spotify.country),
             trackName = getTrackName(track),
-            fileName = util.format('%s%s', getPathName(), trackName),
+            artistName = getArtistName(track),
+            downloadPath = util.format('%s%s', getPathName(), artistName),
+            fileName = util.format('%s%s', downloadPath, trackName),
             trackAlreadyExists = fs.existsSync(fileName) && getFilesizeInBytes(fileName) !== 0;
 
         if (trackAlreadyExists) {
@@ -27,6 +30,9 @@ var downloadTrack = function (spotify, trackURI, callback) {
             callback();
         } else {
             console.log('\tDownloading: %s', trackName);
+            if (!fs.existsSync(downloadPath)){
+                fs.mkdirSync(downloadPath);
+            }
             var file = fs.createWriteStream(fileName);
 
             track.play()

@@ -42,6 +42,11 @@ var getTrackName = function (track) {
     return removeQuotes(trackName.replace(/\//g, ''));
 };
 
+var getArtistName = function (track) {
+    var artistName = util.format('%s/', track.artist[0].name);
+    return artistName;
+};
+
 var getPathName = function(){
     return (path.slice(-1) !== '/') ? path + '/' : path;
 };
@@ -107,6 +112,7 @@ var removeQuotes = function (str) {
 module.exports = {
     id3Track: id3Track,
     getTrackName: getTrackName,
+    getArtistName: getArtistName,
     getPathName: getPathName,
     getFilesizeInBytes: getFilesizeInBytes
 };
