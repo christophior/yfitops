@@ -28,10 +28,13 @@
 
     <div class="container">
       <section id="main_content">
+        <h1>
+<a id="yfitops" class="anchor" href="#yfitops" aria-hidden="true"><span class="octicon octicon-link"></span></a>YFITOPS</h1>
 
-<center><h1>
-<a id="the-underlying-download-logic-has-been-removed-to-prevent-exploitation-by-users" class="anchor" href="#the-underlying-download-logic-has-been-removed-to-prevent-exploitation-by-users" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>The underlying download logic has been removed to prevent exploitation by users</strong>
-</h1></center>
+<pre><code>npm install
+sudo easy_install pip
+sudo pip install eyeD3
+</code></pre>
 
 <h2>
 <a id="configuration" class="anchor" href="#configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuration</h2>
@@ -56,22 +59,7 @@
 
 <p>Running on the current node version seems to not work properly but <a href="http://blog.nodejs.org/2015/01/26/node-v0-10-36-stable/">Node v0.10.36</a> works fine. </p>
 
-<p>To download Node v0.10.36 just go to <a href="http://blog.nodejs.org/2015/01/26/node-v0-10-36-stable/">http://blog.nodejs.org/2015/01/26/node-v0-10-36-stable/</a> and download/install the appropriate version based on your machine.</p>
-
-<hr>
-
-<p>Another way to use different Node versions is to use NVM. To get NVM you can run the following</p>
-
-<pre><code>curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.25.4/install.sh | bash
-</code></pre>
-
-<p>Once installed you can run the following to install and use Node v0.10.36 (note: use will only set this node version for this terminal session)</p>
-
-<pre><code>nvm install 0.10.36
-nvm use 0.10.36
-</code></pre>
-
-<hr>
+<p>To download Node0.10.36 just go to <a href="http://blog.nodejs.org/2015/01/26/node-v0-10-36-stable/">http://blog.nodejs.org/2015/01/26/node-v0-10-36-stable/</a> and download/install the appropriate version based on your machine.</p>
 
 <p>Once you have your config file and Node 0.10.36 you can just do the following to start using the app</p>
 
@@ -89,7 +77,7 @@ node app.js &lt;spotify uri&gt;
 <h2>
 <a id="tips" class="anchor" href="#tips" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tips</h2>
 
-<p>A great way to make this app easier to use is to set an alias up in your .bash_profile that also forces the app to run in v0.10.36 which will help prevent problems in the future. You can run the following</p>
+<p>A great way to make this app easier to use is to set an alias up in your .bash_profile. You can run the following:</p>
 
 <pre><code>vim ~/.bash_profile
 </code></pre>
@@ -98,16 +86,12 @@ node app.js &lt;spotify uri&gt;
 
 <p>alias command='original command to run'</p>
 
-<p>The command that we will be using is nvm run instead of node so we can specify the version along with the full path to the app.js file in this project. You can see what I added to my bash_profile below</p>
+<p>Example:</p>
 
-<pre><code># regular
-alias download='node /Users/Chris/Development/yfitops/app.js'
-
-# if using NVM
-alias download='nvm run 0.10.36 /Users/Chris/Development/yfitops/app.js'
+<pre><code>alias download='node /Users/Chris/Development/yfitops/app.js'
 </code></pre>
 
-<p>After this just save and exit the editor by typing ESC followed by :wq and your new command will be saved. If you try running the new command (you might have to exit and reenter your terminal) you should see the familar output from the app.</p>
+<p>After this just save and exit the editor by typing ESC followed by :wq and your new command will be saved. If you try running the new command (you might have to exit and re-enter your terminal) you should see the familar output from the app.</p>
 
 <p>Ex.</p>
 
@@ -120,6 +104,14 @@ download spotify:track:2sNvitW3TxiTeC9xT9f2ZZ
 # output
 Given URI is a Spotify track...
     Downloading: Kygo - Firestone.mp3
+</code></pre>
+
+<h1>
+<a id="to-prevent-config-file-from-being-pushed" class="anchor" href="#to-prevent-config-file-from-being-pushed" aria-hidden="true"><span class="octicon octicon-link"></span></a>to prevent config file from being pushed</h1>
+
+<pre><code>git update-index --assume-unchanged config/config.json
+# to undo this
+git update-index --no-assume-unchanged config/config.json
 </code></pre>
 
 <h2>
