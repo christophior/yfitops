@@ -31,9 +31,20 @@
         <h1>
 <a id="yfitops" class="anchor" href="#yfitops" aria-hidden="true"><span class="octicon octicon-link"></span></a>YFITOPS</h1>
 
-<pre><code>npm install
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<pre><code>git clone https://github.com/christophior/yfitops.git
+cd yfitops
+npm install
 sudo easy_install pip
 sudo pip install eyeD3
+
+# setup
+node app.js config
+
+# run
+node app.js &lt;spotify uri&gt;
 </code></pre>
 
 <h2>
@@ -63,8 +74,7 @@ sudo pip install eyeD3
 
 <p>Once you have your config file and Node 0.10.36 you can just do the following to start using the app</p>
 
-<pre><code>npm install
-node app.js &lt;spotify uri&gt;
+<pre><code>node app.js &lt;spotify uri&gt;
 </code></pre>
 
 <p>An output showing the progress of the app will be displayed. If an error occurs or the script fails to quit you can always use ctrl+c to kill the app.</p>
@@ -73,6 +83,15 @@ node app.js &lt;spotify uri&gt;
 <a id="spotify-uris" class="anchor" href="#spotify-uris" aria-hidden="true"><span class="octicon octicon-link"></span></a>Spotify URIs</h2>
 
 <p>The application expects a Spotify URI at run time. To grab the URI of a song or playlist you can either right-click on a song or playlist in the Spotify app to copy the URI to your clipboard.</p>
+
+<h2>
+<a id="eyed3" class="anchor" href="#eyed3" aria-hidden="true"><span class="octicon octicon-link"></span></a>eyeD3</h2>
+
+<p>eyeD3 is used to id3 tag the song files with artist and album info. Aside from this info the album artwork is also updated on the song. Eyed3 can be downloaded using pip (which can be downloaded using easy_install).</p>
+
+<pre><code>sudo easy_install pip
+sudo pip install eyeD3
+</code></pre>
 
 <h2>
 <a id="tips" class="anchor" href="#tips" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tips</h2>
