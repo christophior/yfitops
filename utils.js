@@ -11,9 +11,9 @@ var id3Track = function (track, fileName, trackURI, callback) {
             id3Process,
             args = [
                 'eyeD3',
-                '-t', '"'+removeQuotes(track.name)+'"',
-                '-a', '"'+removeQuotes(track.artist[0].name)+'"',
-                '-A', '"'+removeQuotes(track.album.name)+'"',
+                '-t', '"'+formatStr(track.name)+'"',
+                '-a', '"'+formatStr(track.artist[0].name)+'"',
+                '-A', '"'+formatStr(track.album.name)+'"',
                 '-Y', track.album.date.year,
                 '-n', track.number,
                 '-d', track.discNumber,
@@ -21,15 +21,15 @@ var id3Track = function (track, fileName, trackURI, callback) {
 
         if (albumCoverExists) {
             args.push('--add-image');
-            args.push('"' + albumCoverPath + ':FRONT_COVER' + '"');
+            args.push('"' + escapeRegExp(albumCoverPath) + ':FRONT_COVER' + '"');
         }
-        args.push('"' + fileName + '"');
+        args.push('"' + escapeRegExp(fileName) + '"');
         cmd = args.join(' ');
         id3Process = exec(cmd);
 
         id3Process.on('exit', function() {
             if (albumCoverExists) {
-                exec('rm "' + albumCoverPath + '"');
+                exec('rm "' + escapeRegExp(albumCoverPath) + '"');
             }
         });
 
@@ -39,7 +39,7 @@ var id3Track = function (track, fileName, trackURI, callback) {
 
 var getTrackName = function (track) {
     var trackName = util.format('%s - %s.mp3', track.artist[0].name, track.name);
-    return removeQuotes(trackName.replace(/\//g, ''));
+    return formatStr(trackName.replace(/\//g, ''));
 };
 
 var getArtistName = function (track) {
@@ -105,8 +105,13 @@ var privateSaveTemporaryArtworkImage = function (imageUrl, fileName, callback) {
 
 };
 
-var removeQuotes = function (str) {
-    return str.replace(/"/g, '')
+var formatStr = function (str) {
+    var removeQuotes = str.replace(/"/g, '');
+    return removeQuotes;
+};
+
+var escapeRegExp = function (str) {
+    return str.replace(/[\[\]\{\}\(\)\*\+\?\^\$\|]/g, "\\$&");
 };
 
 module.exports = {
