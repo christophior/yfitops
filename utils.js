@@ -111,7 +111,7 @@ var formatStr = function (str) {
 };
 
 var escapeRegExp = function (str) {
-    return str.replace(/[\[\]\{\}\(\)\*\+\?\^\$\|]/g, "\\$&");
+    return str.replace(/[\$]/g, "\\$&");
 };
 
 module.exports = {
