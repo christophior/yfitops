@@ -31,9 +31,8 @@ var id3Track = function (track, fileName, trackURI, callback) {
             if (albumCoverExists) {
                 exec('rm "' + escapeRegExp(albumCoverPath) + '"');
             }
+            callback();
         });
-
-        callback();
     });
 };
 
