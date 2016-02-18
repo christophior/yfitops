@@ -1,8 +1,17 @@
 YFITOPS
 ===========
+Running on the current node version seems to not work properly but [Node v0.10.36](http://blog.nodejs.org/2015/01/26/node-v0-10-36-stable/) works fine. 
+
+To download Node0.10.36 just go to [http://blog.nodejs.org/2015/01/26/node-v0-10-36-stable/](http://blog.nodejs.org/2015/01/26/node-v0-10-36-stable/) and download/install the appropriate version based on your machine.
+
 
 ## Installation
 ```
+# install eyeD3 for metadata
+sudo easy_install pip
+sudo pip install eyeD3
+
+# app installation
 git clone https://github.com/christophior/yfitops.git
 cd yfitops
 npm install
@@ -15,6 +24,10 @@ node app.js config
 # run
 node app.js <spotify uri>
 ```
+
+## eyeD3
+eyeD3 is used to id3 tag the song files with artist and album info. Aside from this info the album artwork is also updated on the song. Eyed3 can be downloaded using pip (which can be downloaded using easy_install).
+
 
 ## Configuration
 Before being able to run the script you will need to do some configuration.
@@ -34,11 +47,6 @@ I believe the default Music folder location in Mac's is **/Users/USERNAME/Music*
 
 ## Running
 
-Running on the current node version seems to not work properly but [Node v0.10.36](http://blog.nodejs.org/2015/01/26/node-v0-10-36-stable/) works fine. 
-
-To download Node0.10.36 just go to [http://blog.nodejs.org/2015/01/26/node-v0-10-36-stable/](http://blog.nodejs.org/2015/01/26/node-v0-10-36-stable/) and download/install the appropriate version based on your machine.
-
-
 Once you have your config file and Node 0.10.36 you can just do the following to start using the app
 
 ```
@@ -50,14 +58,6 @@ An output showing the progress of the app will be displayed. If an error occurs 
 
 ## Spotify URIs
 The application expects a Spotify URI at run time. To grab the URI of a song or playlist you can either right-click on a song or playlist in the Spotify app to copy the URI to your clipboard.
-
-## eyeD3
-eyeD3 is used to id3 tag the song files with artist and album info. Aside from this info the album artwork is also updated on the song. Eyed3 can be downloaded using pip (which can be downloaded using easy_install).
-
-```
-sudo easy_install pip
-sudo pip install eyeD3
-```
 
 ## Tips
 A great way to make this app easier to use is to set an alias up in your .bash_profile. You can run the following:
