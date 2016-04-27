@@ -5,6 +5,7 @@ var util = require('util'),
     getTrackName = require('./utils').getTrackName,
     getArtistName = require('./utils').getArtistName,
     getPathName = require('./utils').getPathName,
+    escapeRegExp = require('./utils').escapeRegExp,
     getFilesizeInBytes = require('./utils').getFilesizeInBytes,
     exec = require('child_process').exec,
     OPEN_IN_ITUNES = true;
@@ -44,7 +45,7 @@ var downloadTrack = function (spotify, trackURI, callback) {
                         console.log('\t\tID3\'d: %s', trackName);
                         if (OPEN_IN_ITUNES) {
                             console.log('\t\t\tOpening in iTunes: ' + trackName);
-                            exec('open -a "itunes" "' + fileName + '"', function (err){
+                            exec('open -a "itunes" "' + escapeRegExp(fileName) + '"', function (err){
                                 if (err) {
                                     console.log(err)
                                 }

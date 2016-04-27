@@ -11,9 +11,9 @@ var id3Track = function (track, fileName, trackURI, callback) {
             id3Process,
             args = [
                 'eyeD3',
-                '-t', '"'+formatStr(track.name)+'"',
-                '-a', '"'+formatStr(track.artist[0].name)+'"',
-                '-A', '"'+formatStr(track.album.name)+'"',
+                '-t', '"'+escapeRegExp(formatStr(track.name))+'"',
+                '-a', '"'+escapeRegExp(formatStr(track.artist[0].name))+'"',
+                '-A', '"'+escapeRegExp(formatStr(track.album.name))+'"',
                 '-Y', track.album.date.year,
                 '-n', track.number,
                 '-d', track.discNumber,
@@ -118,5 +118,6 @@ module.exports = {
     getTrackName: getTrackName,
     getArtistName: getArtistName,
     getPathName: getPathName,
-    getFilesizeInBytes: getFilesizeInBytes
+    getFilesizeInBytes: getFilesizeInBytes,
+    escapeRegExp: escapeRegExp
 };
